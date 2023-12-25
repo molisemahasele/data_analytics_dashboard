@@ -2,3 +2,4 @@ plotly
 pandas
 statistics
 streamlit
+openpyxl
