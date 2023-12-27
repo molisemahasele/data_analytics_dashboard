@@ -123,6 +123,15 @@ min_eggs = df_eggs['Number of eggs'].min()
 max_eggs = df_eggs['Number of eggs'].max()
 std_dev_eggs = df_eggs['Number of eggs'].std()
 
+
+
+# Plotting variance
+variance_chart_eggs = px.line(df_eggs, x='Day', y='Number of eggs', title='Egg Production')
+variance_chart_eggs.update_traces(mode='markers+lines')
+
+# Displaying the variance chart in Streamlit
+st.plotly_chart(variance_chart_eggs)
+
 # Displaying statistics of number of eggs
 st.write(f"Mean number of eggs: {mean_eggs}")
 st.write(f"Variance of number of eggs: {variance_eggs}")
@@ -131,10 +140,3 @@ st.write(f"Median of number of eggs: {median_eggs}")
 st.write(f"Minimum number of eggs: {min_eggs}")
 st.write(f"Maximum number of eggs: {max_eggs}")
 st.write(f"Standard deviation of number of eggs: {std_dev_eggs}")
-
-# Plotting variance
-variance_chart_eggs = px.line(df_eggs, x='Day', y='Number of eggs', title='Egg Production')
-variance_chart_eggs.update_traces(mode='markers+lines')
-
-# Displaying the variance chart in Streamlit
-st.plotly_chart(variance_chart_eggs)
