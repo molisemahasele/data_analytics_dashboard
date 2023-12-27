@@ -121,17 +121,30 @@ fig = px.bar(df, x='Category', y='Amount', color='Category',
 # Display the graph in Streamlit
 st.plotly_chart(fig)
 
-df = pd.read_excel(excel_file, usecols='M:N')  # Adjust columns as needed
+# Read the data from the Excel file
+df = pd.read_excel(excel_file)  # Adjust columns as needed
+
+# Display the column names to check for reference
+st.write("Column Names:")
+st.write(df.columns)
+
+# Assuming the columns might have names different from 'Sales' and 'Expenses', update the column references accordingly
+# Replace 'Sales_Column_Name' and 'Expenses_Column_Name' with the actual column names from your Excel file
+sales_column = 'Sales_Column_Name'  # Replace with the appropriate column name
+expenses_column = 'Expenses_Column_Name'  # Replace with the appropriate column name
 
 # Calculate Net Profit
-df['Net Profit'] = df['Sales'] - df['Expenses']
+if sales_column in df.columns and expenses_column in df.columns:
+    df['Net Profit'] = df[sales_column] - df[expenses_column]
 
-# Calculate Profit Margin (as a percentage)
-df['Profit Margin (%)'] = (df['Net Profit'] / df['Sales']) * 100
+    # Calculate Profit Margin (as a percentage)
+    df['Profit Margin (%)'] = (df['Net Profit'] / df[sales_column]) * 100
 
-# Display the DataFrame with Net Profit and Profit Margin using Streamlit
-st.write("Data with Net Profit and Profit Margin:")
-st.write(df)
+    # Display the DataFrame with Net Profit and Profit Margin using Streamlit
+    st.write("Data with Net Profit and Profit Margin:")
+    st.write(df)
+else:
+    st.write("Sales or Expenses columns not found in the DataFrame.")
 
 sales = df_sales_expenses['Total Sales'].sum()  # Assuming 'Sales' is the column name for sales
 expenses = df_sales_expenses['Total Expenses'].sum()  # Assuming 'Expenses' is the column name for expenses
