@@ -32,14 +32,10 @@ pie_chart = px.pie(df,
 
 st.plotly_chart(pie_chart)
 
-eggs_column = df_participants[df_participants.columns[1]]  # Assuming the second column is Y-axis data
-eggs_column_numeric = pd.to_numeric(eggs_column, errors='coerce')  # Convert to numeric, coerce errors to NaN
+#eggs_column = df_participants[df_participants.columns[1]]  # Assuming the second column is Y-axis data
+#eggs_column_numeric = pd.to_numeric(eggs_column, errors='coerce')  # Convert to numeric, coerce errors to NaN
 
 
-st.write(f"Mode: {data_mode}")
-st.write(f"Mean number of eggs: {data_mean}")
-st.write(f"Minimum number of eggs: {data_min}")
-st.write(f"Maximum number of eggs: {data_max}")
 
 department = fd['Type'].unique().tolist()
 ages = fd['Sales'].unique().tolist()
