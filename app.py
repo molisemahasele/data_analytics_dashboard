@@ -56,12 +56,12 @@ number_of_result = filtered_data.shape[0]
 st.markdown(f'*Available Results: {number_of_result}*')
 
 # Grouping by 'November Week' and summing 'Sales'
-df_grouped = filtered_data.groupby('November Week')['Sales'].sum().reset_index()
+df_grouped = filtered_data.groupby('Date')['Sales'].sum().reset_index()
 
 # Creating a bar chart using Plotly Express with 'Sales' on the y-axis
 bar_chart = px.bar(df_grouped,
                     title="Sales Timeline",
-                    x='November Week',
+                    x='Date',
                     y='Sales',
                     text='Sales',
                     color_discrete_sequence=['#F63366'] * len(df_grouped),
