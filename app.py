@@ -115,6 +115,9 @@ df = pd.read_excel(excel_file, usecols='P:Q')  # Adjust columns as needed
 sales_column = 'Total Sales'
 expenses_column = 'Total Expenses'
 
+# Remove rows with 'None' values in 'Total Sales' or 'Total Expenses'
+df = df.dropna(subset=[sales_column, expenses_column])
+
 # Calculate Net Profit and Profit Margin
 if sales_column in df.columns and expenses_column in df.columns:
     df['Net Profit'] = df[sales_column] - df[expenses_column]
