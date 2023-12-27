@@ -130,8 +130,8 @@ st.write(df.columns)
 
 # Assuming the columns might have names different from 'Sales' and 'Expenses', update the column references accordingly
 # Replace 'Sales_Column_Name' and 'Expenses_Column_Name' with the actual column names from your Excel file
-sales_column = 'Sales_Column_Name'  # Replace with the appropriate column name
-expenses_column = 'Expenses_Column_Name'  # Replace with the appropriate column name
+sales_column = 'Sales.1'  # Replace with the appropriate column name
+expenses_column = 'Expenses'  # Replace with the appropriate column name
 
 # Calculate Net Profit
 if sales_column in df.columns and expenses_column in df.columns:
