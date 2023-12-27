@@ -109,26 +109,20 @@ fig = px.bar(df, x='Category', y='Amount', color='Category',
 # Display the graph in Streamlit
 st.plotly_chart(fig)
 
-df = pd.read_excel(excel_file)  # Adjust columns as needed
-
-# Display the DataFrame to verify the data
-st.write("Data:")
-st.write(df)
+df = pd.read_excel(excel_file, usecols='P:Q')  # Adjust columns as needed
 
 # Assuming the columns are named 'Total Sales' and 'Total Expenses'
 sales_column = 'Total Sales'
 expenses_column = 'Total Expenses'
 
-# Calculate Net Profit
+# Calculate Net Profit and Profit Margin
 if sales_column in df.columns and expenses_column in df.columns:
     df['Net Profit'] = df[sales_column] - df[expenses_column]
-
-    # Calculate Profit Margin (as a percentage)
     df['Profit Margin (%)'] = (df['Net Profit'] / df[sales_column]) * 100
 
-    # Display the DataFrame with Net Profit and Profit Margin using Streamlit
-    st.write("Data with Net Profit and Profit Margin:")
-    st.write(df)
+    # Display Net Profit and Profit Margin
+    st.write("Net Profit and Profit Margin:")
+    st.write(df[['Net Profit', 'Profit Margin (%)']])
 else:
     st.write("Sales or Expenses columns not found in the DataFrame.")
                 
