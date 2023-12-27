@@ -3,3 +3,4 @@ pandas
 statistics
 streamlit
 openpyxl
+numpy
