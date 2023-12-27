@@ -35,22 +35,6 @@ st.plotly_chart(pie_chart)
 eggs_column = df_participants[df_participants.columns[1]]  # Assuming the second column is Y-axis data
 eggs_column_numeric = pd.to_numeric(eggs_column, errors='coerce')  # Convert to numeric, coerce errors to NaN
 
-# Calculate mode and mean after cleaning
-eggs_column_numeric = eggs_column_numeric.dropna()  # Remove NaN values
-data_mode = statistics.mode(eggs_column_numeric)
-data_mean = statistics.mean(eggs_column_numeric)
-data_min = min(eggs_column_numeric)
-data_max = max(eggs_column_numeric)
-
-# Create the line chart
-line_chart = px.line(
-    df_participants,
-    x=df_participants.columns[0],  # Assuming the first column is X-axis
-    y=df_participants.columns[1],  # Assuming the second column is Y-axis
-    title='Production of eggs for November'
-)
-
-st.plotly_chart(line_chart)
 
 st.write(f"Mode: {data_mode}")
 st.write(f"Mean number of eggs: {data_mean}")
@@ -115,15 +99,26 @@ sales_minus_expenses = sales - expenses
 # Display the result
 st.write(f"Total Profit: {sales_minus_expenses}")
                 
+# Read the data from columns E and F
 df_eggs = pd.read_excel(excel_file, usecols='E:F')
 
-# Calculating mean and variance of 'Number of eggs'
+# Calculating mean, variance, mode, median, min, max, and standard deviation of 'Number of eggs'
 mean_eggs = df_eggs['Number of eggs'].mean()
 variance_eggs = df_eggs['Number of eggs'].var()
+mode_eggs = statistics.mode(df_eggs['Number of eggs'])
+median_eggs = df_eggs['Number of eggs'].median()
+min_eggs = df_eggs['Number of eggs'].min()
+max_eggs = df_eggs['Number of eggs'].max()
+std_dev_eggs = df_eggs['Number of eggs'].std()
 
-# Displaying mean and variance of number of eggs
+# Displaying statistics of number of eggs
 st.write(f"Mean number of eggs: {mean_eggs}")
 st.write(f"Variance of number of eggs: {variance_eggs}")
+st.write(f"Mode of number of eggs: {mode_eggs}")
+st.write(f"Median of number of eggs: {median_eggs}")
+st.write(f"Minimum number of eggs: {min_eggs}")
+st.write(f"Maximum number of eggs: {max_eggs}")
+st.write(f"Standard deviation of number of eggs: {std_dev_eggs}")
 
 # Plotting variance
 variance_chart_eggs = px.line(df_eggs, x='Day', y='Number of eggs', title='Variance in Number of Eggs')
