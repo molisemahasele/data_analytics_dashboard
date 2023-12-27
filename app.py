@@ -132,3 +132,9 @@ variance_chart = px.bar(df_variance,
 
 # Displaying the variance chart in Streamlit
 st.plotly_chart(variance_chart)
+
+variance_per_product = df.groupby('Type')['Sales'].var()
+
+# Displaying the numerical variance for each product
+st.write("Variance of Sales for Each Product:")
+st.write(variance_per_product)
