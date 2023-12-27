@@ -121,6 +121,18 @@ fig = px.bar(df, x='Category', y='Amount', color='Category',
 # Display the graph in Streamlit
 st.plotly_chart(fig)
 
+df = pd.read_excel(excel_file, usecols='M:N')  # Adjust columns as needed
+
+# Calculate Net Profit
+df['Net Profit'] = df['Sales'] - df['Expenses']
+
+# Calculate Profit Margin (as a percentage)
+df['Profit Margin (%)'] = (df['Net Profit'] / df['Sales']) * 100
+
+# Display the DataFrame with Net Profit and Profit Margin using Streamlit
+st.write("Data with Net Profit and Profit Margin:")
+st.write(df)
+
 sales = df_sales_expenses['Total Sales'].sum()  # Assuming 'Sales' is the column name for sales
 expenses = df_sales_expenses['Total Expenses'].sum()  # Assuming 'Expenses' is the column name for expenses
 sales_minus_expenses = sales - expenses
@@ -139,8 +151,6 @@ median_eggs = df_eggs['Number of eggs'].median()
 min_eggs = df_eggs['Number of eggs'].min()
 max_eggs = df_eggs['Number of eggs'].max()
 std_dev_eggs = df_eggs['Number of eggs'].std()
-
-
 
 # Plotting variance
 variance_chart_eggs = px.line(df_eggs, x='Day', y='Number of eggs', title='Egg Production')
