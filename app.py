@@ -71,6 +71,22 @@ bar_chart = px.bar(df_grouped,
 bar_chart.update_layout(yaxis_title='Sales')  # Set y-axis title to 'Sales'
 st.plotly_chart(bar_chart)
 
+# Read the data from columns H to J
+df = pd.read_excel(excel_file, usecols='H:J')
+
+# Calculating the frequency of sales per type of product
+sales_frequency = df['Type'].value_counts()
+
+# Displaying the frequency of sales per type of product
+st.write("Frequency of Sales per Type of Product:")
+st.write(sales_frequency)
+
+# Plotting the frequency of sales per type of product
+fig = px.bar(sales_frequency, x=sales_frequency.index, y=sales_frequency.values, labels={'x': 'Type of Product', 'y': 'Frequency'}, title='Sales Frequency per Product Type')
+fig.update_traces(marker_color='#00897B')  # Updating marker color for better visualization
+fig.update_layout(xaxis_title='Type of Product', yaxis_title='Frequency')
+st.plotly_chart(fig)
+
 df_sales_expenses = pd.read_excel(excel_file, usecols='P:Q', header=0)
 
 
@@ -117,7 +133,7 @@ st.write(f"Maximum number of eggs: {max_eggs}")
 st.write(f"Standard deviation of number of eggs: {std_dev_eggs}")
 
 # Plotting variance
-variance_chart_eggs = px.line(df_eggs, x='Day', y='Number of eggs', title='Variance in Number of Eggs')
+variance_chart_eggs = px.line(df_eggs, x='Day', y='Number of eggs', title='Egg Production')
 variance_chart_eggs.update_traces(mode='markers+lines')
 
 # Displaying the variance chart in Streamlit
