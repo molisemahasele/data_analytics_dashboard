@@ -77,19 +77,7 @@ st.plotly_chart(bar_chart)
 df = pd.read_excel(excel_file, usecols='H:J')
 
 # Checking for numerical columns
-numeric_columns = df.select_dtypes(include='number').columns
 
-# Generating correlation matrix if numerical columns are present
-if len(numeric_columns) > 1:
-    correlation_matrix = df[numeric_columns].corr()
-
-    # Plotting the correlation matrix using seaborn heatmap
-    plt.figure(figsize=(8, 6))
-    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
-    plt.title('Correlation Matrix of Numerical Columns')
-    plt.xticks(rotation=45)
-    plt.yticks(rotation=0)
-    st.pyplot()
 
 # Calculating the frequency of sales per type of product
 sales_frequency = df['Type'].value_counts()
@@ -121,17 +109,15 @@ fig = px.bar(df, x='Category', y='Amount', color='Category',
 # Display the graph in Streamlit
 st.plotly_chart(fig)
 
-# Read the data from the Excel file
 df = pd.read_excel(excel_file)  # Adjust columns as needed
 
-# Display the column names to check for reference
-st.write("Column Names:")
-st.write(df.columns)
+# Display the DataFrame to verify the data
+st.write("Data:")
+st.write(df)
 
-# Assuming the columns might have names different from 'Sales' and 'Expenses', update the column references accordingly
-# Replace 'Sales_Column_Name' and 'Expenses_Column_Name' with the actual column names from your Excel file
-sales_column = 'Sales.1'  # Replace with the appropriate column name
-expenses_column = 'Expenses'  # Replace with the appropriate column name
+# Assuming the columns are named 'Total Sales' and 'Total Expenses'
+sales_column = 'Total Sales'
+expenses_column = 'Total Expenses'
 
 # Calculate Net Profit
 if sales_column in df.columns and expenses_column in df.columns:
@@ -145,13 +131,6 @@ if sales_column in df.columns and expenses_column in df.columns:
     st.write(df)
 else:
     st.write("Sales or Expenses columns not found in the DataFrame.")
-
-sales = df_sales_expenses['Total Sales'].sum()  # Assuming 'Sales' is the column name for sales
-expenses = df_sales_expenses['Total Expenses'].sum()  # Assuming 'Expenses' is the column name for expenses
-sales_minus_expenses = sales - expenses
-
-# Display the result
-st.write(f"Total Profit: {sales_minus_expenses}")
                 
 # Read the data from columns E and F
 df_eggs = pd.read_excel(excel_file, usecols='E:F')
