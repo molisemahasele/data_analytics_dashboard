@@ -115,4 +115,20 @@ sales_minus_expenses = sales - expenses
 # Display the result
 st.write(f"Total Profit: {sales_minus_expenses}")
                 
+df = pd.read_excel(excel_file, usecols='H:J', header=0)
 
+# Grouping by 'November Week' and calculating variance of 'Sales' within each group
+df_variance = df.groupby(['November Week', 'Type'])['Sales'].var().reset_index()
+
+# Creating a bar chart using Plotly Express to visualize variance across types for each week
+variance_chart = px.bar(df_variance,
+                        title="Variance in Sales Across Types for Each Week",
+                        x='November Week',
+                        y='Sales',
+                        color='Type',
+                        barmode='group',
+                        labels={'Sales': 'Variance', 'Type': 'Product'},
+                        template='plotly_white')
+
+# Displaying the variance chart in Streamlit
+st.plotly_chart(variance_chart)
