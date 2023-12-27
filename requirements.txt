@@ -4,3 +4,5 @@ statistics
 streamlit
 openpyxl
 numpy
+seaborn
+matplotlib
