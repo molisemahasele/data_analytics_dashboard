@@ -3,6 +3,8 @@ import streamlit as st
 import plotly.express as px
 from PIL import Image
 import statistics
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Analytics Dashboard")
 st.header('Bokhabane Analytics')
@@ -73,6 +75,21 @@ st.plotly_chart(bar_chart)
 
 # Read the data from columns H to J
 df = pd.read_excel(excel_file, usecols='H:J')
+
+# Checking for numerical columns
+numeric_columns = df.select_dtypes(include='number').columns
+
+# Generating correlation matrix if numerical columns are present
+if len(numeric_columns) > 1:
+    correlation_matrix = df[numeric_columns].corr()
+
+    # Plotting the correlation matrix using seaborn heatmap
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+    plt.title('Correlation Matrix of Numerical Columns')
+    plt.xticks(rotation=45)
+    plt.yticks(rotation=0)
+    st.pyplot()
 
 # Calculating the frequency of sales per type of product
 sales_frequency = df['Type'].value_counts()
