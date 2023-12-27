@@ -115,27 +115,19 @@ sales_minus_expenses = sales - expenses
 # Display the result
 st.write(f"Total Profit: {sales_minus_expenses}")
                 
-df = pd.read_excel(excel_file, usecols='H:J', header=0)
+df_eggs = pd.read_excel(excel_file, usecols='E:F')
 
-# Grouping by 'November Week' and calculating variance of 'Sales' within each group
-df_variance = df.groupby(['November Week', 'Type'])['Sales'].var().reset_index()
+# Calculating mean and variance of 'Number of eggs'
+mean_eggs = df_eggs['Number of eggs'].mean()
+variance_eggs = df_eggs['Number of eggs'].var()
 
-# Creating a bar chart using Plotly Express to visualize variance across types for each week
-variance_chart = px.bar(df_variance,
-                        title="Variance in Sales Across Types for Each Week",
-                        x='November Week',
-                        y='Sales',
-                        color='Type',
-                        barmode='group',
-                        labels={'Sales': 'Variance', 'Type': 'Product'},
-                        template='plotly_white')
+# Displaying mean and variance of number of eggs
+st.write(f"Mean number of eggs: {mean_eggs}")
+st.write(f"Variance of number of eggs: {variance_eggs}")
+
+# Plotting variance
+variance_chart_eggs = px.line(df_eggs, x='Day', y='Number of eggs', title='Variance in Number of Eggs')
+variance_chart_eggs.update_traces(mode='markers+lines')
 
 # Displaying the variance chart in Streamlit
-st.plotly_chart(variance_chart)
-
-# Calculating mean and variance of 'Sales' for each 'Type'
-mean_and_variance = df.groupby('Type')['Sales'].agg(['mean', 'var'])
-
-# Displaying the mean and variance for each product
-st.write("Mean and Variance of Sales for Each Product:")
-st.write(mean_and_variance)
+st.plotly_chart(variance_chart_eggs)
