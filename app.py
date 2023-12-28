@@ -26,7 +26,7 @@ def set_theme():
             background-color: #090F17;
             color: #F0F6FC;
         }
-        .streamlit-plotly-chart {
+        .plotly-chart {
             background-color: #090F17;
         }
         .streamlit-data-frame {
