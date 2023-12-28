@@ -18,17 +18,25 @@ def set_theme():
     st.markdown(
         """
         <style>
-        .reportview-container {
-            background: #090F17;
+        body {
+            background-color: #090F17;
             color: #F0F6FC;
         }
         .sidebar .sidebar-content {
-            background: #090F17;
+            background-color: #090F17;
+            color: #F0F6FC;
+        }
+        .streamlit-plotly-chart {
+            background-color: #090F17;
+        }
+        .streamlit-data-frame {
+            background-color: #090F17;
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
+
 
 
 set_theme()
