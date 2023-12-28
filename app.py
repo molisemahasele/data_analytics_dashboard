@@ -8,9 +8,7 @@ import matplotlib.pyplot as plt
 
 st.set_page_config(
     page_title="Analytics Dashboard",
-    page_icon=":chart_with_upwards_trend:",
-    layout="wide",
-    initial_sidebar_state="expanded",
+    page_icon=":chart_with_upwards_trend:"
 )
 
 
