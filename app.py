@@ -6,9 +6,34 @@ import statistics
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="Analytics Dashboard")
-st.header('Bokhabane Analytics')
+st.set_page_config(
+    page_title="Analytics Dashboard",
+    page_icon=":chart_with_upwards_trend:",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 
+
+def set_theme():
+    st.markdown(
+        """
+        <style>
+        .reportview-container {
+            background: #090F17;
+            color: #F0F6FC;
+        }
+        .sidebar .sidebar-content {
+            background: #090F17;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+set_theme()
+
+st.header('Bokhabane Analytics')
 
 excel_file = 'bokhabaneData.xlsx'
 #excel_file2 = 'bokhabaneData.xlsx'
